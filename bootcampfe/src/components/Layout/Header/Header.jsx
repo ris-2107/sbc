@@ -56,11 +56,13 @@ const Header = ({ isAuthenticated, user }) => {
           </DrawerHeader>
           <DrawerBody>
             <VStack spacing={"5"} alignItems={"flex-start"}>
+              <LinkButton onClick={onClose} url="/home" title="Home" />
               <LinkButton
                 onClick={onClose}
                 url="/register"
                 title="Register user"
               />
+
               {isAuthenticated && (
                 <LinkButton
                   onClick={onClose}
@@ -80,7 +82,7 @@ const Header = ({ isAuthenticated, user }) => {
                 <LinkButton
                   onClick={onClose}
                   url="/create-note"
-                  title="Send A Note"
+                  title="Send/Create A Note"
                 />
               )}
               {isAuthenticated && (

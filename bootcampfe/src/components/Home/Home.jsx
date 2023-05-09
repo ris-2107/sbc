@@ -41,17 +41,20 @@ const Home = () => {
             spacing="4"
           >
             <Heading children="Security Bootcamp TEKION" size={"2xl"} />
-            <Text
-              fontSize={"2xl"}
-              fontFamily="cursive"
-              textAlign={["center", "left"]}
-              children="Please Login First !"
-            />
+            {user.isAuthenticated ==false && (
+              <Text
+                fontSize={"2xl"}
+                fontFamily="cursive"
+                textAlign={["center", "left"]}
+                children="Please Login First !"
+              />
+            )}
+            {user.isAuthenticated==false && (
             <Link to="/login">
               <Button size={"lg"} colorScheme="yellow">
                 Login
               </Button>
-            </Link>
+            </Link>)}
           </VStack>
           <Image
             className="vector-graphics"
@@ -82,7 +85,8 @@ const Home = () => {
         </HStack>
       </Box>
       <div className="container2">
-        <video autoplay
+        <video
+          autoplay
           src={introVideo}
           controls
           controlsList="nodownload nofullscreen noremoteplayback"

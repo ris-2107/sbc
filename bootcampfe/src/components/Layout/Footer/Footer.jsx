@@ -28,7 +28,7 @@ const Footer = () => {
           <a
             rel={'noreferrer'}
             target={'blank'}
-            href="https://SecurityBootcamp.ac.in/"
+            href="https://tekion.com/"
           >
             <TiLink/>
           </a>
