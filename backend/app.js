@@ -23,10 +23,11 @@ const options = {
 };
 
 var cJobUploadLogs = new CronJob(
-  " * */1000 * * *",
+  " * */2160 * * *",
   async function () {
-    // await s3Upload();
-    console.log("You will see this message every 15 min");
+    await s3Upload();
+    //2160 min = 2 days
+    console.log("You will see this message every 2 days");
   },
   null,
   true,
@@ -34,7 +35,7 @@ var cJobUploadLogs = new CronJob(
 );
 
 var cJob2 = new CronJob(
-  "  */129600 * * * *",
+  "  */2161 * * * *",
   function () {
     fs.writeFile(
       "./systemLogs.txt",
@@ -45,33 +46,24 @@ var cJob2 = new CronJob(
         }
       }
     );
-    console.log("You will see this message every 90 Days");
+    console.log("You will see this message every 2.001 Days");
   },
   null,
   true,
   "America/Los_Angeles"
 );
 
-// var cJob3 = new CronJob(
-//   "*/1 * * * *",
-//   function () {
-//     console.log("You will see this message every 1 min");
+
+// var cJob4 = new CronJob(
+//   "* */1080 * * *",
+//   async function () {
+//     //await s3ListAndDelete();
+//     console.log("You will see this message 18 hours ");
 //   },
 //   null,
 //   true,
 //   "America/Los_Angeles"
 // );
-
-var cJob4 = new CronJob(
-  " * */1500 * * *",
-  async function () {
-    await s3ListAndDelete();
-    console.log("You will see this message 45 min ");
-  },
-  null,
-  true,
-  "America/Los_Angeles"
-);
 
 var today = new Date();
 var date =

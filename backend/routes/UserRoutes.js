@@ -6,6 +6,7 @@ import {
   deleteMyProfile,
   deleteUser,
   forgetPassword,
+  getAllNotes,
   getAllUsers,
   getMyProfile,
   login,
@@ -71,5 +72,6 @@ router
 
 router.route("/createnote").post(createNote);
 router.route("/updatenoteper").post(updateNotePermission);
+router.route("/getnotes").get(getAllNotes);
 
 export default router;

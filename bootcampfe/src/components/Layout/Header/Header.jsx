@@ -61,27 +61,33 @@ const Header = ({ isAuthenticated, user }) => {
                 url="/register"
                 title="Register user"
               />
-              <LinkButton
-                onClick={onClose}
-                url="/profile"
-                title="View Profile"
-              />
-              <LinkButton
-                onClick={onClose}
-                url="/update-profile"
-                title="Update Profile"
-              />
+              {isAuthenticated && (
+                <LinkButton
+                  onClick={onClose}
+                  url="/profile"
+                  title="View Profile"
+                />
+              )}
+              {isAuthenticated && (
+                <LinkButton
+                  onClick={onClose}
+                  url="/update-profile"
+                  title="Update Profile"
+                />
+              )}
 
               {isAuthenticated && (
-                // <LinkButton
-                //   onClick={onClose}
-                //   url="/create"
-                //   title="Create A Course"
-                // />
                 <LinkButton
                   onClick={onClose}
                   url="/create-note"
                   title="Send A Note"
+                />
+              )}
+              {isAuthenticated && (
+                <LinkButton
+                  onClick={onClose}
+                  url="/view-notes"
+                  title="View Notes"
                 />
               )}
               {isAuthenticatedUser == true && (

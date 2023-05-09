@@ -390,16 +390,17 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const createNote = catchAsyncErrors(async (req, res, next) => {
+  console.log("Entered createNote ")
   const user = await User.findById(req.body.datac.userid);
   console.log(req.body.datac);
 
   //create a course:
   const newNote = await GlobalNote.create({
-    note_creator: req.body.datac.note_creator,
-    note_creator_id:user._id,
+    note_creator: user.name,
+    note_creator_id: user._id,
     emailsAllowed: [`${req.body.datac.emailallowed}`],
-    note_title: req.body.datac.ntitle,
-    note_description: req.body.datac.ndesc,
+    note_title: req.body.datac.note_title,
+    note_description: req.body.datac.note_description,
   });
   res.status(200).json({
     success: true,
@@ -407,6 +408,17 @@ export const createNote = catchAsyncErrors(async (req, res, next) => {
     data: newNote
   });
 
+})
+
+export const getAllNotes = catchAsyncErrors(async (req, res, next) => {
+  const allNotes = await GlobalNote.find({});
+
+  console.log(allNotes)
+  res.status(200).json({
+    success: true,
+    message: "Notes fetched",
+    data: allNotes
+  });
 })
 
 export const updateNotePermission = catchAsyncErrors(async (req, res, next) => {

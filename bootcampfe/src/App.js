@@ -28,6 +28,7 @@ import UpdateProfile from "./components/Extras/UpdateProfile";
 import OtpPage from "./components/Extras/OtpPage";
 import ProfilePage from "./components/Extras/ProfilePage";
 import CreateUserNote from "./components/Extras/CreateUserNote";
+import ViewNotes from "./components/Extras/ViewNotes";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -44,6 +45,7 @@ function App() {
         <Route path="/request" element={<Request />} />
         <Route path="/create" element={<CreateCourseUser />} />
         <Route path="/create-note" element={<CreateUserNote />} />
+        <Route path="/view-notes" element={<ViewNotes />} />
         <Route path="/userdashboard" element={<UserDashboardListView />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<ProfilePage />} />

@@ -11,6 +11,8 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import cursor from "../../assets/images/cursor.png";
 import { createCourse } from "../../redux/actions/adminActions";
+import axios from "axios";
+import { server } from "../../redux/store";
 // import Sidebar from '../Sidebar';
 export const fileUploadCss = {
   cursor: "pointer",
@@ -31,36 +33,30 @@ const CreateUserNote = () => {
   const [description, setDescription] = useState();
   const [createdBy, setCreatedBy] = useState();
   const [sendTo, setSendTo] = useState();
-  const [emailsAllowed, setEmailsAllowed] = useState("");
+  const [emailAllowed, setEmailAllowed] = useState("");
 
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user);
   const { loading, error, message } = useSelector((state) => state.user);
-  const handleNotes = async () => {
-    const fdata = {};
-  };
 
-  const categories = [
-    "Web development",
-    "Big Data",
-    "Data Science",
-    "App Development",
-    "Data Structure And Algorithms",
-    "Game Development",
-  ];
-
-  const submitHandler = (e) => {
+  const handleNotes = async (e) => {
     e.preventDefault();
-
-    const myForm = new FormData();
-
-    myForm.append("title", title);
-    myForm.append("description", description);
-    myForm.append("sendto", sendTo);
-    myForm.append("createdBy", createdBy);
-
-    dispatch(createCourse(title, description, sendTo, createdBy));
+    var loggedUser = localStorage.getItem("user");
+    loggedUser = JSON.parse(loggedUser);
+    console.log(loggedUser);
+    const fdata = {
+      userid: loggedUser._id,
+      note_creator: loggedUser.normalize,
+      emailallowed: emailAllowed,
+      note_title: title,
+      note_description: description,
+    };
+    await axios.post(`${server}createnote`, {datac:fdata}, {
+      withCredentials: true,
+    });
   };
+
+
 
   useEffect(() => {
     if (error) {
@@ -82,7 +78,7 @@ const CreateUserNote = () => {
       templateColumns={["1fr", "5fr 1fr"]}
     >
       <Container py={"16"}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleNotes}>
           <Heading
             textTransform={"uppercase"}
             children={"Create Note"}
@@ -112,8 +108,8 @@ const CreateUserNote = () => {
               focusBorderColor={"purple.300"}
             />
             <Input
-              value={emailsAllowed}
-              onChange={(e) => setEmailsAllowed(e.target.value)}
+              value={emailAllowed}
+              onChange={(e) => setEmailAllowed(e.target.value)}
               placeholder={"Allow Permission Email"}
               type={"text"}
               focusBorderColor={"purple.700"}
@@ -124,7 +120,6 @@ const CreateUserNote = () => {
               w={"full"}
               colorScheme={"purple"}
               type={"submit"}
-              onClick={handleNotes}
             >
               {"Create "}
             </Button>
