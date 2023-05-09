@@ -91,8 +91,8 @@ const Header = ({ isAuthenticated, user }) => {
                   title="Dashboard"
                 />
               )}
-              <LinkButton onClick={onClose} url="/contact" title="Contact Us" />
-              <LinkButton onClick={onClose} url="/about" title="About Us" />
+              {/* <LinkButton onClick={onClose} url="/contact" title="Contact Us" />
+              <LinkButton onClick={onClose} url="/about" title="About Us" /> */}
 
               <HStack
                 justifyContent={"space-evenly"}
