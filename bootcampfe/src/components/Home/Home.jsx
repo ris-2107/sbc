@@ -40,8 +40,19 @@ const Home = () => {
             alignItems={["center", "flex-end"]}
             spacing="4"
           >
-            <Heading children="Security Bootcamp TEKION" size={"2xl"} />
-            {user.isAuthenticated ==false && (
+            {<Heading children="Security Bootcamp" size={"2xl"} />}
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                color: "#30D5C8",
+                fontWeight: 800,
+                fontSize: "1.8rem",
+              }}
+            >
+              TEKION
+            </span>
+            {!user.isAuthenticated && (
               <Text
                 fontSize={"2xl"}
                 fontFamily="cursive"
@@ -49,12 +60,13 @@ const Home = () => {
                 children="Please Login First !"
               />
             )}
-            {user.isAuthenticated==false && (
-            <Link to="/login">
-              <Button size={"lg"} colorScheme="yellow">
-                Login
-              </Button>
-            </Link>)}
+            {!user.isAuthenticated && (
+              <Link to="/login">
+                <Button size={"lg"} colorScheme="yellow">
+                  Login
+                </Button>
+              </Link>
+            )}
           </VStack>
           <Image
             className="vector-graphics"

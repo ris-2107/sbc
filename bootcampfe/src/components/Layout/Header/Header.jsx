@@ -60,7 +60,7 @@ const Header = ({ isAuthenticated, user }) => {
               <LinkButton
                 onClick={onClose}
                 url="/register"
-                title="Register user"
+                title="Register | Signup"
               />
 
               {isAuthenticated && (
