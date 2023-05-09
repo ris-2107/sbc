@@ -22,7 +22,10 @@ var time =
 var dateTime = date + " " + time;
 
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
+  // if(req.headers.isverifiedui==true){req.user = user;}
   const { token } = req.cookies;
+  console.log("reached here Auth")
+  console.log(token)
 
   if (!token) {
     fs.appendFile(

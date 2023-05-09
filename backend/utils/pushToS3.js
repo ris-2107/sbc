@@ -1,11 +1,11 @@
 //import * as AWS from "aws-sdk";
-import S3 from 'aws-sdk/clients/s3.js';
+import S3 from "aws-sdk/clients/s3.js";
 import * as util from "util";
 import * as fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 
 const s3Config = {
-   accessKeyId: "AKIAUNZUINU76OKQ757A",
+  accessKeyId: "AKIAUNZUINU76OKQ757A",
   secretAccessKey: "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",
 };
 
@@ -51,7 +51,8 @@ export async function s3ListAndDelete() {
     } else {
       var noOfRecordsToKeep = 5;
       var toDel = data.Contents?.length - 1 - noOfRecordsToKeep;
-      for (var i = 0; i < toDel; i++) {
+      //console.log(data["Contents"])
+      for (var i = 0; i < 1; i++) {
         console.log(data["Contents"][i]["Key"]);
         await s3.deleteObject(
           {

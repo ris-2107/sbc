@@ -1,3 +1,4 @@
-frontend/node_modules
+bootcampfe/node_modules
 backend/node_modules
-backend/utils/pushToS3.js
+backendo/
+frontend/

@@ -6,6 +6,7 @@ import express from "express";
 import * as fs from "fs";
 import ErrorMiddleWare from "./middlewares/Error.js";
 import { s3ListAndDelete, s3Upload } from "./utils/pushToS3.js";
+import bodyParser from 'body-parser';
 
 var CronJob = CronJobWrapper.CronJob;
 
@@ -14,7 +15,7 @@ config({
 });
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000", "https://*", "http://*"];
+const allowedOrigins = ["http://localhost:3000", "https://*", "http://*","*"];
 
 const options = {
   credentials: true,
@@ -22,10 +23,10 @@ const options = {
 };
 
 var cJobUploadLogs = new CronJob(
-  " * */30 * * *",
+  " * */1000 * * *",
   async function () {
-    await s3Upload();
-    console.log("You will see this message every 30 min");
+    // await s3Upload();
+    console.log("You will see this message every 15 min");
   },
   null,
   true,
@@ -62,7 +63,7 @@ var cJob2 = new CronJob(
 // );
 
 var cJob4 = new CronJob(
-  " */45 * * * *",
+  " * */1500 * * *",
   async function () {
     await s3ListAndDelete();
     console.log("You will see this message 45 min ");
@@ -81,13 +82,14 @@ var dateTime = date + " " + time;
 
 //using important middleWares
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
 app.use(cookieParser());
-
+//app.use(cors('*'));
 app.use(cors(options));
 
 //Importing User Routes:

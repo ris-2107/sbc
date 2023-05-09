@@ -8,10 +8,17 @@ import { Course } from "../models/Course.js";
 import cloudinary from "cloudinary";
 import getDataUri from "../utils/dataUri.js";
 import * as redis from "redis";
+import { GlobalNote } from "../models/GlobalNote.js";
 let redisClient;
 
 (async () => {
-  redisClient = redis.createClient();
+  redisClient = redis.createClient({
+    password: 'LLZ1CPC639ipEv9orgUdpXCAUIbmcpIQ',
+    socket: {
+      host: 'redis-15636.c301.ap-south-1-1.ec2.cloud.redislabs.com',
+      port: 15636
+    }
+  });
 
   redisClient.on("error", (error) => console.error(`Error : ${error}`));
 
@@ -56,9 +63,12 @@ export const register = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const verifyEmailOtp = catchAsyncErrors(async (req, res, next) => {
-  const { otp, email } = req.body;
+  const otp = req.body.datab['otp'];
+  const email = req.body.datab.email
+  console.log(otp, email)
   if (!email || !otp)
     return next(new ErrorHandler("Please Enter All Fields", 400));
+  console.log(otp, email)
 
   const user = await User.findOne({ email });
   if (user.userRegOtp == otp) {
@@ -129,7 +139,6 @@ export const getMyProfile = catchAsyncErrors(async (req, res, next) => {
 
 export const deleteMyProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user._id);
-
   await cloudinary.v2.uploader.destroy(user.avatar.public_id);
 
   //cancel Subscription:
@@ -183,6 +192,23 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+export const updateProfilenew = catchAsyncErrors(async (req, res, next) => {
+  console.log("Enetred")
+  const formData = (req.body.datab)
+  const user = await User.findById(formData.userId).select("+password")
+  req.headers['user'] = user;
+
+  if (formData.name) user.name = formData.name;
+  if (formData.email) user.email = formData.email;
+
+  await user.save();
+  res.status(200).json({
+    success: true,
+    message: "Profile Updated Successfully",
+    user: user
+  });
+});
+
 export const updateProfilePicture = catchAsyncErrors(async (req, res, next) => {
   //upload file on cloudinary:
   const file = req.file;
@@ -190,6 +216,32 @@ export const updateProfilePicture = catchAsyncErrors(async (req, res, next) => {
   const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
   const user = await User.findById(req.user._id).select("+password");
+
+  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
+  user.avatar = {
+    public_id: myCloud.public_id,
+    url: myCloud.secure_url,
+  };
+
+  await user.save();
+  res.status(200).json({
+    success: true,
+    message: "Profile Picture Updated Successfully",
+  });
+});
+export const updateProfilePictureNew = catchAsyncErrors(async (req, res, next) => {
+  //upload file on cloudinary:
+  console.log("updateProfilePictureNew")
+  // console.log(req.body)
+  var userId = req.body.userid;
+  console.log(userId)
+  const file = req.file;
+  const fileUri = getDataUri(file);
+  //console.log(fileUri)
+  const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
+  const user = await User.findById(userId).select("+password");
 
   await cloudinary.v2.uploader.destroy(user.avatar.public_id);
 
@@ -336,3 +388,44 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) => {
     message: "User Deleted ",
   });
 });
+
+export const createNote = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.body.datac.userid);
+  console.log(req.body.datac);
+
+  //create a course:
+  const newNote = await GlobalNote.create({
+    note_creator: req.body.datac.note_creator,
+    note_creator_id:user._id,
+    emailsAllowed: [`${req.body.datac.emailallowed}`],
+    note_title: req.body.datac.ntitle,
+    note_description: req.body.datac.ndesc,
+  });
+  res.status(200).json({
+    success: true,
+    message: "Note created ",
+    data: newNote
+  });
+
+})
+
+export const updateNotePermission = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.body.datac.userid);
+
+  //update a Note:
+  const note = await GlobalNote.findById(req.body.datac.noteid);
+  if ((note.emailsAllowed).includes(`${req.body.datac.emailtoedit}`)) {
+    const index = (note.emailsAllowed).indexOf(`${req.body.datac.emailtoedit}`); if (index > -1) {
+      (note.emailsAllowed).splice(index, 1);
+    }
+  } else {
+    note.emailsAllowed.push(req.body.datac.emailtoedit);
+  }
+  await note.save();
+  res.status(200).json({
+    success: true,
+    message: "Email Modified Successfully ",
+    data: note
+  });
+
+})
