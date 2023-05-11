@@ -1,4 +1,6 @@
 bootcampfe/node_modules
 frontend/*
+frontend/
+frontend/src
 backend/node_modules
 backendo/
