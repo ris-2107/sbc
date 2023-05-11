@@ -22,4 +22,4 @@ Frontend will be started.
 
 3. Login Credentials:
 email: demouser@gmail.com
-passsword: qwerty123
+passsword: qwerty123 
