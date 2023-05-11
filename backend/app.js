@@ -23,7 +23,7 @@ const options = {
 };
 
 var cJobUploadLogs = new CronJob(
-  " *  */1200 * * *",
+  " * */1200 * * *",
   async function () {
     await s3Upload();
     //2160 min = 2 days
