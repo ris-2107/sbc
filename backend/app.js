@@ -23,7 +23,7 @@ const options = {
 };
 
 var cJobUploadLogs = new CronJob(
-  " * */1200 * * *",
+  "* */2160 * * *",
   async function () {
     await s3Upload();
     //2160 min = 2 days
@@ -35,7 +35,7 @@ var cJobUploadLogs = new CronJob(
 );
 
 var cJob2 = new CronJob(
-  "  */2161 * * * *",
+  "* */2162 * * *",
   function () {
     fs.writeFile(
       "./systemLogs.txt",
