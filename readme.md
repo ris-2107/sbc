@@ -1,3 +1,5 @@
+# Chennai Group1 Security Bootcamp Project.
+
 ## Instructions for running the app.
 
 ### Note: NodeJs version 16+ should be installed. Npm should also be installed
