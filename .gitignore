@@ -6,3 +6,4 @@ backend/node_modules
 backendo/
 .gradle
 *.rdb
+backend/systemLogs.txt
