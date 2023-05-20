@@ -1,5 +1,0 @@
-[2023-5-20 14:50:12] INFO: Old Logs cleared at 5/20/2023, 2:52:00 PM 
-[2023-5-20 14:57:46] INFO CatchAsyncErrors :No Error 
-[2023-5-20 14:58:1] INFO CatchAsyncErrors :No Error 
-[2023-5-20 14:58:3] INFO CatchAsyncErrors :No Error 
-[2023-5-20 14:58:14] INFO CatchAsyncErrors :No Error 
