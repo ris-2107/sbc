@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon server.js"
   },
-  "author": "",
+  "author": "Rishabh Sinha",
   "dependencies": {
     "aws-sdk": "^2.1364.0",
     "bcrypt": "^5.0.1",
