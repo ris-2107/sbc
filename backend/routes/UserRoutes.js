@@ -9,6 +9,7 @@ import {
   getAllNotes,
   getAllUsers,
   getMyProfile,
+  getSingleNoteById,
   login,
   logout,
   register,
@@ -73,5 +74,6 @@ router
 router.route("/createnote").post(createNote);
 router.route("/updatenoteper").post(updateNotePermission);
 router.route("/getnotes").get(getAllNotes);
+router.route("/getnotebyid/:noteid").get(getSingleNoteById);
 
 export default router;

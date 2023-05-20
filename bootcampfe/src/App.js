@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import About from "./components/About/About";
 import AdminCourses from "./components/Admin/AdminCourses/AdminCourses";
 import CreateCourse from "./components/Admin/CreateCourse/CreateCourse";
@@ -14,8 +14,13 @@ import Contact from "./components/Contact/Contact";
 import CoursePage from "./components/CoursePage/CoursePage";
 import CreateCourseUser from "./components/CoursePage/CreateCourseUser";
 import Courses from "./components/Courses/Courses";
-import UserDashboard from "./components/Dashboard/UserDashboard";
 import UserDashboardListView from "./components/Dashboard/UserdashBoardListView";
+import CreateUserNote from "./components/Extras/CreateUserNote";
+import OtpPage from "./components/Extras/OtpPage";
+import ProfilePage from "./components/Extras/ProfilePage";
+import UpdateProfile from "./components/Extras/UpdateProfile";
+import ViewNotes from "./components/Extras/ViewNotes";
+
 import Home from "./components/Home/Home";
 import Footer from "./components/Layout/Footer/Footer";
 import Header from "./components/Layout/Header/Header";
@@ -24,11 +29,7 @@ import PaymentFail from "./components/Payments/PaymentFail";
 import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import Subscribe from "./components/Payments/Subscribe";
 import Request from "./components/Request/Request";
-import UpdateProfile from "./components/Extras/UpdateProfile";
-import OtpPage from "./components/Extras/OtpPage";
-import ProfilePage from "./components/Extras/ProfilePage";
-import CreateUserNote from "./components/Extras/CreateUserNote";
-import ViewNotes from "./components/Extras/ViewNotes";
+import ViewSingleNote from "./components/Extras/ViewSingleNote";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -46,6 +47,7 @@ function App() {
         <Route path="/create" element={<CreateCourseUser />} />
         <Route path="/create-note" element={<CreateUserNote />} />
         <Route path="/view-notes" element={<ViewNotes />} />
+        <Route path="/view-single-note/*" element={<ViewSingleNote />} />
         <Route path="/userdashboard" element={<UserDashboardListView />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<ProfilePage />} />

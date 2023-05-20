@@ -413,6 +413,17 @@ export const getAllNotes = catchAsyncErrors(async (req, res, next) => {
   });
 })
 
+export const getSingleNoteById = catchAsyncErrors(async (req, res, next) => {
+  const noteId = req.params.noteid;
+  const singleNote = await GlobalNote.findById(noteId)
+  console.log(singleNote)
+  res.status(200).json({
+    success: true,
+    message: "Note fetched",
+    data: singleNote
+  });
+})
+
 export const updateNotePermission = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.body.datac.userid);
 
