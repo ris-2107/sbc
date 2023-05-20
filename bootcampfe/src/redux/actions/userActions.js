@@ -38,7 +38,6 @@ export const register = (formData) => async (dispatch) => {
 };
 
 export const updateProfileNew = (formData) => async (dispatch) => {
-  console.log("Enetered: updateProfileNew")
   console.log(formData);
   try {
     dispatch({
@@ -52,7 +51,6 @@ export const updateProfileNew = (formData) => async (dispatch) => {
       type: "updateProfileSuccess",
       payload: data.message,
     });
-    console.log("Updated")
     alert("Updated Successfully");
   } catch (error) {
     alert(error.response.data.message);
@@ -64,7 +62,6 @@ export const updateProfileNew = (formData) => async (dispatch) => {
 };
 
 export const verifyOtpAction = (formData) => async (dispatch) => {
-  console.log("Entered: verifyOtpAction");
   console.log(formData);
   try {
     dispatch({
@@ -78,7 +75,6 @@ export const verifyOtpAction = (formData) => async (dispatch) => {
       type: "verifyOtpSuccess",
       payload: data.message,
     });
-    console.log("OTP SUCCESS ")
     alert("OTP VERIFIED  Successfully");
     window.location.href('/home')
   } catch (error) {

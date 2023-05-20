@@ -15,9 +15,7 @@ var time =
 var dateTime = date + " " + time;
 
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
-  // if(req.headers.isverifiedui==true){req.user = user;}
   const { token } = req.cookies;
-  console.log("reached here Auth")
   console.log(token)
 
   if (!token) {
@@ -40,11 +38,9 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   if (cacheResults) {
     isCached = true;
     user = JSON.parse(cacheResults);
-    console.log("Chached result");
   } else {
     user = await User.findById(decodedData._id);
     await redisClient.set(`${decodedData._id}`, JSON.stringify(user));
-    console.log("cache set result");
   }
   req.user = user;
   if (user.isEmailVerified == false) {

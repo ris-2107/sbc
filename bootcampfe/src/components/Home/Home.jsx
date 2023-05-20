@@ -104,6 +104,7 @@ const Home = () => {
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback
+          muted
         ></video>
       </div>
     </section>

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { server } from '../store';
 
 export const createCourse=(title,description,category,createdBy,image)=>async dispatch=>{
-  console.log("myForm Data: ",title,description)
     try {
         const config={
             headers: {

@@ -1,7 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 export const userReducer = createReducer({}, (builder) => {
-  console.log("User reducer")
   builder
     .addCase("loginRequest", (state) => {
       state.loading = true;
@@ -83,7 +82,6 @@ export const userReducer = createReducer({}, (builder) => {
 });
 
 export const profileReducer = createReducer({}, (builder) => {
-  console.log("Profile reducer")
   builder
     .addCase("updateProfileRequest", (state) => {
       state.loading = true;

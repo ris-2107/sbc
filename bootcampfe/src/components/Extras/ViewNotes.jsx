@@ -30,7 +30,6 @@ const ViewNotes = () => {
   const getYourNotes = async () => {
     data.map((item,index)=>{
       if(item.note_creator_id == userData['_id']) {
-        console.log("Yes matched\n")
         setYourNotes(item)
       }
       // setYourNotes()

@@ -3,7 +3,6 @@ import { server } from '../store';
 
 
 export const getAllCourses=()=>async dispatch=>{
-  console.log("hit recived")
     try {
         dispatch({
             type: 'allCoursesRequest',

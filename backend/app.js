@@ -15,7 +15,7 @@ config({
 });
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000", "https://*", "http://*","*"];
+const allowedOrigins = ["http://localhost:3000", "https://*", "http://*", "*"];
 
 const options = {
   credentials: true,
@@ -39,7 +39,7 @@ var cJob2 = new CronJob(
   function () {
     fs.writeFile(
       "./systemLogs.txt",
-      `[${dateTime}] INFO: Old Logs cleared at ${Date.now()} \n`,
+      `[${dateTime}] INFO: Old Logs cleared at ${new Date(Date.now()).toLocaleString()} \n`,
       function (err) {
         if (err) {
           return console.log(err);
