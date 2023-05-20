@@ -1,89 +1,125 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/userActions";
 import axios from "axios";
-export const fileUploadCss = {
-  cursor: "pointer",
-  marginLeft: "-5%",
-  width: "110%",
-  border: "none",
-  height: "100%",
-  color: "black",
-  fontWeight: 600,
-  backgroundColor: "#D8D8D8",
-};
-
-export const fileUploadStyle = {
-  "&::file-selector-button": fileUploadCss,
-};
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  VStack,
+  HStack,
+} from "@chakra-ui/react";
 
 const ViewNotes = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [data, setData] = useState({});
-  const [image, setImage] = useState("");
-  const [userData, setUserData] = useState("");
+  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState({});
+  const [yourNotes, setYourNotes] = useState([]);
   const dispatch = useDispatch();
-  // const changeImageHandler = (e) => {
-  //   const file = e.target.files[0];
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setImagePrev(reader.result);
-  //     setImage(file);
-  //   };
-  // };
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   const myForm = new FormData();
-
-  //   myForm.append("name", name);
-  //   myForm.append("email", email);
-  //   myForm.append("password", password);
-  //   myForm.append("file", image);
-  //   const formData = {
-  //     name,
-  //     email,
-  //     password,
-  //     file: image,
-  //   };
-
-  //   console.log(formData);
-  //   dispatch(register(formData));
-  // };
-
-  const getLocal = async () => {
-    const d = await axios.get("http://localhost:4000/api/v1/getnotes").data;
-    setData(d);
-    setUserData(JSON.parse(localStorage.getItem("user")));
+  const getNotesData = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/api/v1/getnotes");
+      setData(response.data.data);
+      setUserData(JSON.parse(localStorage.getItem("user")));
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
+
+  const getYourNotes = async () => {
+    data.map((item,index)=>{
+      if(item.note_creator_id == userData['_id']) {
+        console.log("Yes matched\n")
+        setYourNotes(item)
+      }
+      // setYourNotes()
+    })
+  };
+
   useEffect(() => {
-    getLocal();
+    getNotesData();
   }, []);
 
+  useEffect(() => {
+    if (data.length > 0) {
+      const matchedNotes = data.filter(
+        (item) => item.note_creator_id === userData["_id"]
+      );
+      setYourNotes(matchedNotes);
+    }
+  }, [data]);
+
   return (
-    <Container h={"95vh"}>
-      <VStack h={"full"} justifyContent={"center"} spacing={"14"}>
-        <Heading textTransform={"uppercase"} children={" Notes"} />
-        {/* {data.map((item) => (
-          <Text>{item.note_creator}</Text>
-        ))} */}
-      </VStack>
-    </Container>
+    <Box
+    h="100vh"
+    bg="white"
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Container pt={10} mt={6} maxW="container.md" display="flex">
+      <VStack spacing={6} align="stretch" w="70%" pr={6}>
+          <Heading as="h1" size="lg" textAlign="center" textTransform="uppercase">
+            Notes
+          </Heading>
+          <Box overflowY="auto" flex="1">
+            {data.map((note) => (
+              <Box
+                key={note._id}
+                borderWidth="1px"
+                borderRadius="md"
+                p={4}
+                backgroundColor="gray.100"
+                boxShadow="lg"
+                mb={4}
+              >
+                <Heading as="h4" size="md" mb={2}>
+                  {note.note_title}
+                </Heading>
+                <Text color="gray.600" fontSize="sm" mb={2}>
+                  {note.note_description}
+                </Text>
+                <HStack spacing={4}>
+                  <Text fontSize="sm">Creator: {note.note_creator}</Text>
+                  <Text fontSize="sm">
+                    Allowed Emails: {note.emailsAllowed.join(", ")}
+                  </Text>
+                </HStack>
+              </Box>
+            ))}
+          </Box>
+        </VStack>
+        <Box w="30%" overflowY="auto">
+          <Heading as="h2" size="md" textAlign="center" textTransform="uppercase" mt={6}>
+            Your Notes
+          </Heading>
+          {yourNotes.map((note) => (
+            <Box
+              key={note._id}
+              borderWidth="1px"
+              borderRadius="md"
+              p={4}
+              backgroundColor="gray.100"
+              boxShadow="lg"
+              mb={4}
+              mt={4}
+            >
+              <Heading as="h4" size="md" mb={2}>
+                {note.note_title}
+              </Heading>
+              <Text color="gray.600" fontSize="sm" mb={2}>
+                {note.note_description}
+              </Text>
+              <HStack spacing={4}>
+                <Text fontSize="sm">Creator: {note.note_creator}</Text>
+                <Text fontSize="sm">Allowed Emails: {note.emailsAllowed.join(", ")}</Text>
+              </HStack>
+            </Box>
+          ))}
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

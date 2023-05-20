@@ -20,7 +20,7 @@ const Login = () => {
   const submitHandler=(e)=>{
     e.preventDefault();
     navigate("/")
-    dispatch(login(email,password))
+    dispatch(login(email,password)) 
   }
   return (
     <Container h={'95vh'}>

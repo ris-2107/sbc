@@ -98,7 +98,7 @@ const Home = () => {
       </Box>
       <div className="container2">
         <video
-          autoplay
+          autoPlay
           src={introVideo}
           controls
           controlsList="nodownload nofullscreen noremoteplayback"

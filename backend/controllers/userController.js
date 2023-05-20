@@ -16,11 +16,11 @@ let redisClient;
     password: 'LLZ1CPC639ipEv9orgUdpXCAUIbmcpIQ',
     socket: {
       host: 'redis-15636.c301.ap-south-1-1.ec2.cloud.redislabs.com',
-      port: 15636
+        port: 15636
     }
   });
 
-  redisClient.on("error", (error) => console.error(`Error : ${error}`));
+  redisClient.on("error", (error) => console.error(`Error Redis Connection : ${error}`));
 
   await redisClient.connect();
 })();
@@ -412,7 +412,7 @@ export const createNote = catchAsyncErrors(async (req, res, next) => {
 
 export const getAllNotes = catchAsyncErrors(async (req, res, next) => {
   const allNotes = await GlobalNote.find({});
-
+console.log(" GlobalNote find")
   console.log(allNotes)
   res.status(200).json({
     success: true,

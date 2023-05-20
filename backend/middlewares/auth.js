@@ -6,13 +6,6 @@ import * as fs from "fs";
 import * as redis from "redis";
 let redisClient;
 
-(async () => {
-  redisClient = redis.createClient();
-
-  redisClient.on("error", (error) => console.error(`Error : ${error}`));
-
-  await redisClient.connect();
-})();
 
 var today = new Date();
 var date =
