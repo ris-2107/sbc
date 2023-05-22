@@ -3,7 +3,7 @@ import { adminReducer } from "./reducers/adminReducer";
 import { courseReducer } from "./reducers/courseReducer";
 import { profileReducer, userReducer } from "./reducers/userReducer";
 
-export const server = 'http://localhost:4000/api/v1/'
+export const server = 'http://3.95.66.123:4000/api/v1/'
 
 const store = configureStore({
     reducer: {

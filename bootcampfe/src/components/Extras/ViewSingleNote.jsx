@@ -43,7 +43,7 @@ const ViewSingleNote = () => {
   const getNoteData = async (id) => {
     console.log("Note Id: \t" + id);
     await axios
-      .get(`http://localhost:4000/api/v1/getnotebyid/${id}`)
+      .get(`http://3.95.66.123:4000/api/v1/getnotebyid/${id}`)
       .then((res) => {
         const noteData = res.data.data;
         console.log(res.data.data);
