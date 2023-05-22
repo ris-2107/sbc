@@ -98,7 +98,7 @@ const ViewSingleNote = () => {
         <form onSubmit={handleNotes}>
           <Heading
             textTransform={"uppercase"}
-            children={"Create Note"}
+            children={"Edit Note Permission"}
             my={"16"}
             textAlign={["center", "left"]}
           />

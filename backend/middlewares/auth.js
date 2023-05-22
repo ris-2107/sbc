@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { catchAsyncErrors } from "./CatchAsyncErrors.js";
+import { catchAsyncErrors } from "./catchAsyncErrors.js";
 import * as fs from "fs";
 import * as redis from "redis";
 let redisClient;

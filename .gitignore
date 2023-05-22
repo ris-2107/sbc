@@ -7,3 +7,5 @@ backendo/
 .gradle
 *.rdb
 backend/systemLogs.txt
+backend/.DS_Store
+.DS_Store

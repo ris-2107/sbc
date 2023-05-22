@@ -15,7 +15,8 @@ config({
 });
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000", "https://*", "http://*", "*"];
+const allowedOrigins = ["http://localhost:3000", "https://*", "http://*", "*", "http://3.95.66.123:3000"];
+//const allowedOrigins = ["*"];
 
 const options = {
   credentials: true,

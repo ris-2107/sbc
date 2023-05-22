@@ -27,7 +27,9 @@ const ViewNotes = () => {
 
   const getNotesData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/getnotes");
+      const response = await axios.get(
+        "http://localhost:4000/api/v1/getnotes"
+      );
       setData(response.data.data);
       setUserData(JSON.parse(localStorage.getItem("user")));
     } catch (error) {
