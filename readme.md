@@ -4,11 +4,10 @@
 
 ### Note: NodeJs version 16+ should be installed. Npm should also be installed
 
-1. Navigate to the backend folder : " backend "
---> run npm i -g nodemon 
---> run: 'npm i'
---> wait for the installation to complete .
---> Run : 'npm run dev'
+1. Navigate to the backend folder : "backend"
+ 1. Run:  docker-compose build
+ 2. Run : docker-compose up
+ Docker container will pop up.
 
 Backend server will be started.
 
@@ -16,10 +15,10 @@ Note: NodeJs version 16+ should be installed. & npm should be installed
 
 
 
-2. Navigate to the folder: " bootcampFe " ( NOT frontend )
---> Run : npm i
---> Run : npm start
-Frontend will be started.
+2. Navigate to the folder: "bootcampFe"
+ 1. Run:  docker-compose build
+ 2. Run : docker-compose up
+ Docker container will pop up.
 
 
 3. Login Credentials:
